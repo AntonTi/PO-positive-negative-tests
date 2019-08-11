@@ -1,59 +1,68 @@
-package PO;
+package test.java.PO;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import test.java.Utils.PropertyLoader;
 
 public class HomePage extends BasePage {
-    public HomePage(WebDriver driver)
-    {
+    public HomePage(WebDriver driver) {
         super(driver);
     }
 
-    By contactsBtn = By.cssSelector(".callback-btn");
-    By full_name = By.id("b-contacte__full-name");
-    By phone = By.id("b-contacte-phone-tel");
-    By submit = By.xpath("//input[@value='Отправить']");
-    By message = By.xpath("//div[@class='b-header-contacte-phone-thank']");
+    By homePageHeader = By.xpath("//h1");
+    By eveningCoursesBtn = By.id("menu-item-411");
+    By eveningCoursesItem = By.id("menu-item-7880");
+    By dayCoursesBtn = By.id("menu-item-7901");
+    By daycoursesItem = By.id("menu-item-412");
 
     public HomePage isShown() {
+        logger.info("Open Home Page");
+        /*logger.debug("debug message");
+        logger.warn("warn message");
+        logger.error("error message");
+        logger.fatal("fatal message");*/
         driver.manage().window().maximize();
-        driver.get("http://iteaua-develop.demo.gns-it.com/ru/");
-        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(contactsBtn));
+        driver.get(PropertyLoader.getProperty("url"));
+        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(homePageHeader));
         return this;
     }
 
     public HomePage openContactPage() {
+        logger.info("Open Contact Page");
         wait.until(ExpectedConditions.elementToBeClickable(contactsBtn));
         driver.findElement(contactsBtn).click();
         return this;
     }
 
-    public HomePage sendFillForm() {
-        wait.until(ExpectedConditions.elementToBeClickable(phone));
-        driver.findElement(full_name).sendKeys("testAnton");
-        driver.findElement(phone).click();
-        driver.findElement(phone).sendKeys("0501234567");
-        wait.until(ExpectedConditions.elementToBeClickable(submit));
-        driver.findElement(submit).click();
-        wait.until(ExpectedConditions.elementToBeClickable(message));
+    public HomePage openEveningCoursesPage() {
+        logger.info("open Evening Courses Page");
+        Actions action = new Actions(driver);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(eveningCoursesBtn));
+        action.moveToElement(driver.findElement(eveningCoursesBtn)).perform();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(eveningCoursesItem));
+        driver.findElement(eveningCoursesItem).click();
+        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("(//h2)[23]")));
+        //wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("#course h2")));
+        //wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//*[@id=\"course\"]/div//h2")));
         return this;
     }
 
-    public String getFormMessage() {
-        String message_form = driver.findElement(message).getText();
-        return message_form;
-    }
-
-    public HomePage sendEmptyForm() {
-        wait.until(ExpectedConditions.elementToBeClickable(submit));
-        driver.findElement(submit).click();
+    public HomePage openDayCoursesPage() {
+        logger.info("Open Day Courses Page");
+        Actions action = new Actions(driver);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(dayCoursesBtn));
+        action.moveToElement(driver.findElement(dayCoursesBtn)).perform();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(daycoursesItem));
+        driver.findElement(daycoursesItem).click();
         return this;
     }
 
-    public String getFormEmptyMessage(){
-        String style = driver.findElement(By.id("b-contacte__full-name")).getAttribute("style");
-        return style;
+    public HomePage Close() {
+        logger.warn("Close Home Page");
+        driver.close();
+        return this;
     }
 
 
