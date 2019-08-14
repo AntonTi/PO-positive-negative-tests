@@ -75,8 +75,6 @@ public class GenTest {
         homePage.isShown();
         homePage.openEveningCoursesPage();
         homePage.openCourse(courseName);
-         //       .openNigthCourses()
-          //      .openCourse(courseName);
         int actualPrice = homePage.getCoursePrice();
         assertEquals(actualPrice, expectedPrice, String.format("Expected price to be equals '%d' for '%s'", expectedPrice, courseName));
     }
