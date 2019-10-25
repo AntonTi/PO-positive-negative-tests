@@ -4,20 +4,20 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import test.java.PO.BasePage;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class DayCoursesPage extends BasePage {
+
+    By dayCoursesPageHeader = By.xpath("//h1[contains(text(), 'Дневное обучение')]");
+
     public DayCoursesPage(WebDriver driver) {
         super(driver);
     }
 
-    By dayCoursesPageHeader = By.xpath("//h1[contains(text(), 'Дневное обучение')]");
-
     public DayCoursesPage isShown() {
-        logger.info("Open Day Courses Page");
+        logger.info("Day Courses Page is Shown");
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(dayCoursesPageHeader));
         return this;
     }
@@ -54,4 +54,5 @@ public class DayCoursesPage extends BasePage {
         driver.close();
         return this;
     }
+
 }

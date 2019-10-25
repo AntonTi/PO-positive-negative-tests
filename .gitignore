@@ -2,5 +2,6 @@
 target/
 *.iml
 logs/
+*.log
 screenshots/
 allure-results/

@@ -9,14 +9,16 @@ import java.util.Arrays;
 import java.util.List;
 
 public class EveningCoursesPage extends BasePage {
+
+    By eveningCoursesPageHeader = By.xpath("//h1[contains(text(), 'Вечерние курсы')]");
+    By priceHolder = By.xpath("//li[@class='r-total-price-wrapper']//span");
+
     public EveningCoursesPage(WebDriver driver) {
         super(driver);
     }
 
-    By eveningCoursesPageHeader = By.xpath("//h1[contains(text(), 'Вечерние курсы')]");
-
     public EveningCoursesPage isShown() {
-        logger.info("Open Evening Courses Page");
+        logger.info("Evening Courses Page is Shown");
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(eveningCoursesPageHeader));
         return this;
     }
@@ -58,6 +60,23 @@ public class EveningCoursesPage extends BasePage {
             }
         }
         return true;
+    }
+
+    public EveningCoursesPage openCourse(String name) {
+        logger.info(String.format("Open Course '%s'", name));
+        By course = By.xpath(String.format("//h2[text()='%s']/..//a[text()='Просмотреть']", name));
+        wait.until(ExpectedConditions.elementToBeClickable(course));
+        driver.findElement(course).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[@data-filter='.course-list']")));
+        return this;
+    }
+
+    public int getCoursePrice() {
+        logger.info("Get Evening Course Price");
+        wait.until(ExpectedConditions.presenceOfElementLocated(priceHolder));
+        String rawPrice = driver.findElement(priceHolder).getText();
+        int price = Integer.parseInt(rawPrice.substring(0, rawPrice.indexOf(" ")));
+        return price;
     }
 
     public EveningCoursesPage Close() {

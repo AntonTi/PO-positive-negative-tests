@@ -7,16 +7,15 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import test.java.PO.ContactPage;
-import test.java.PO.DayCoursesPage;
-import test.java.PO.EveningCoursesPage;
-import test.java.PO.HomePage;
+import test.java.PO.*;
 
 import static org.testng.Assert.*;
 
 public class GenTest {
+
+    TopLogoPanel topLogoPanel;
     HomePage homePage;
-    ContactPage contactPage;
+    ContactsPage contactsPage;
     DayCoursesPage dayCoursesPage;
     EveningCoursesPage eveningCoursesPage;
     WebDriver driver;
@@ -27,61 +26,71 @@ public class GenTest {
                 , "D:\\Download\\chromedriver_win32\\chromedriver.exe");
         driver = new ChromeDriver();
         context.setAttribute("webDriver", driver);
+        topLogoPanel = new TopLogoPanel(driver);
         homePage = new HomePage(driver);
-        contactPage = new ContactPage(driver);
         dayCoursesPage = new DayCoursesPage(driver);
         eveningCoursesPage = new EveningCoursesPage(driver);
+        contactsPage = new ContactsPage(driver);
     }
 
 
-    @Test(description = "positive test callback form")
-    public void test1FormCheck() {
+    @Test(invocationCount = 1, description = "Callback positive test form")
+    public void CallbackFormCheckPos() {
         homePage.isShown();
-        homePage.openContactPage();
-        contactPage.sendFillForm();
+        topLogoPanel.openCallbackForm();
+        topLogoPanel.fillCallbackForm();
+        topLogoPanel.sendCallbackForm();
 
-        assertEquals(contactPage.getFormMessage(),
+        assertEquals(topLogoPanel.getMessageFromForm(),
                 "Спасибо!\n" + "Наш менеджер свяжется с Вами.");
+
     }
 
-    @Test(description = "negative callback test form")
-    public void test2FormCheck() {
+    @Test(invocationCount = 1, description = "Callback negative test form")
+    public void CallbackFormCheckNeg() {
         homePage.isShown();
-        homePage.openContactPage();
-        contactPage.sendEmptyForm();
+        topLogoPanel.openCallbackForm();
+        topLogoPanel.fillEmptyCallbackForm();
+        topLogoPanel.sendCallbackForm();
 
-        assertEquals(contactPage.getFormEmptyMessage(),
+        assertEquals(topLogoPanel.getBorderRedFromForm(),
                 "border-color: red;");
     }
 
-    @Test(description = "check evening courses are present")
+    @Test(invocationCount = 1, description = "Check evening courses are present")
     public void eveningCoursesCheck() {
         homePage.isShown();
         homePage.openEveningCoursesPage();
+        eveningCoursesPage.isShown();
 
         assertTrue(eveningCoursesPage.checkEveningCoursesArePresent());
     }
 
-    @Test(description = "check day courses are present")
+    @Test(invocationCount = 1, description = "Check day courses are present")
     public void dayCoursesCheck() {
         homePage.isShown();
         homePage.openDayCoursesPage();
+        dayCoursesPage.isShown();
 
         assertTrue(dayCoursesPage.checkDayCoursesArePresent());
     }
 
-    @Test(description = "Check courses price", dataProvider = "coursesProvider")
-    public void checkCoursesPrice(String courseName, int expectedPrice) {
+    @Test(description = "Check evening courses price", dataProvider = "eveningCoursesProvider")
+    public void eveningCoursesPriceCheck(String courseName, int expectedPrice) {
         homePage.isShown();
         homePage.openEveningCoursesPage();
-        homePage.openCourse(courseName);
-        int actualPrice = homePage.getCoursePrice();
-        assertEquals(actualPrice, expectedPrice, String.format("Expected price to be equals '%d' for '%s'", expectedPrice, courseName));
+        eveningCoursesPage.isShown();
+        eveningCoursesPage.openCourse(courseName);
+        int actualPrice = eveningCoursesPage.getCoursePrice();
+
+        assertEquals(actualPrice, expectedPrice,
+                String.format("Expected price to be equals '%d' for '%s'",
+                        expectedPrice, courseName));
     }
 
-    @DataProvider(name = "coursesProvider")
+    @DataProvider(name = "eveningCoursesProvider")
     public Object[][] coursesProvider() {
-        return new Object[][] {
+        return new Object[][]{
                 {"Тестирование", 17300},
                 {"Frontend development", 18100},
                 {"JS development", 45200},
@@ -108,8 +117,8 @@ public class GenTest {
         };
     }
 
-    @Test(description = "debug test for fail result")
-    public void test666() {
+    @Test(description = "Debug test for fail result")
+    public void testFail() {
         homePage.isShown();
         fail();
 
@@ -117,8 +126,8 @@ public class GenTest {
 
 
     @AfterMethod
-    public void finilize()
-    {
+    public void finilize() {
         driver.quit();
     }
+
 }
