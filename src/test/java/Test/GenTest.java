@@ -1,9 +1,6 @@
 package test.java.Test;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.ITestContext;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -11,21 +8,16 @@ import test.java.PO.*;
 
 import static org.testng.Assert.*;
 
-public class GenTest {
+public class GenTest extends TestBaseSetup {
 
     TopLogoPanel topLogoPanel;
     HomePage homePage;
     ContactsPage contactsPage;
     DayCoursesPage dayCoursesPage;
     EveningCoursesPage eveningCoursesPage;
-    WebDriver driver;
 
-    @BeforeMethod(description = "Initialize custom driver")
-    public void init(ITestContext context) {
-        System.setProperty("webdriver.chrome.driver"
-                , "D:\\Download\\chromedriver_win32\\chromedriver.exe");
-        driver = new ChromeDriver();
-        context.setAttribute("webDriver", driver);
+    @BeforeMethod(description = "Initialize Page factory")
+    public void init2(ITestContext context) {
         topLogoPanel = new TopLogoPanel(driver);
         homePage = new HomePage(driver);
         dayCoursesPage = new DayCoursesPage(driver);
@@ -121,13 +113,6 @@ public class GenTest {
     public void testFail() {
         homePage.isShown();
         fail();
-
-    }
-
-
-    @AfterMethod
-    public void finilize() {
-        driver.quit();
     }
 
 }
