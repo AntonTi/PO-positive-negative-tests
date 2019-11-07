@@ -18,13 +18,19 @@ public class EveningCoursesPage extends BasePage {
     }
 
     public EveningCoursesPage isShown() {
-        logger.info("Evening Courses Page is Shown");
+        logger.info("Evening Courses Page is shown");
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(eveningCoursesPageHeader));
         return this;
     }
 
+    public String getTitle() {
+        logger.info("get Evening Courses Title");
+        String title = driver.getTitle();
+        return title;
+    }
+
     public boolean checkEveningCoursesArePresent() {
-        logger.info("Check Evening Courses Are Present");
+        logger.info("check Evening Courses are present");
         String arr[] = {
                 "Тестирование",
                 "Frontend development",
@@ -63,7 +69,7 @@ public class EveningCoursesPage extends BasePage {
     }
 
     public EveningCoursesPage openCourse(String name) {
-        logger.info(String.format("Open Course '%s'", name));
+        logger.info(String.format("open course '%s'", name));
         By course = By.xpath(String.format("//h2[text()='%s']/..//a[text()='Просмотреть']", name));
         wait.until(ExpectedConditions.elementToBeClickable(course));
         driver.findElement(course).click();
@@ -72,7 +78,7 @@ public class EveningCoursesPage extends BasePage {
     }
 
     public int getCoursePrice() {
-        logger.info("Get Evening Course Price");
+        logger.info("get Evening Course Price");
         wait.until(ExpectedConditions.presenceOfElementLocated(priceHolder));
         String rawPrice = driver.findElement(priceHolder).getText();
         int price = Integer.parseInt(rawPrice.substring(0, rawPrice.indexOf(" ")));
@@ -80,7 +86,7 @@ public class EveningCoursesPage extends BasePage {
     }
 
     public EveningCoursesPage Close() {
-        logger.warn("Close Evening Courses Page");
+        logger.warn("close Evening Courses Page");
         driver.close();
         return this;
     }

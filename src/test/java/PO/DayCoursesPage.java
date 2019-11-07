@@ -17,13 +17,19 @@ public class DayCoursesPage extends BasePage {
     }
 
     public DayCoursesPage isShown() {
-        logger.info("Day Courses Page is Shown");
+        logger.info("Day Courses Page is shown");
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(dayCoursesPageHeader));
         return this;
     }
 
+    public String getTitle() {
+        logger.info("get Day Courses Title");
+        String title = driver.getTitle();
+        return title;
+    }
+
     public boolean checkDayCoursesArePresent() {
-        logger.info("Check Day Courses Are Present");
+        logger.info("check Day Courses are present");
         String arr[] = {
                 "Microsoft",
                 "Cisco",
@@ -50,7 +56,7 @@ public class DayCoursesPage extends BasePage {
     }
 
     public DayCoursesPage Close() {
-        logger.warn("Close Day Courses Page");
+        logger.warn("close Day Courses Page");
         driver.close();
         return this;
     }

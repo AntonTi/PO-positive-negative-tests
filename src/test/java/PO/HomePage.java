@@ -21,11 +21,17 @@ public class HomePage extends BasePage {
     }
 
     public HomePage isShown() {
-        logger.info("Home Page is Shown");
+        logger.info("Home Page is shown");
         driver.manage().window().maximize();
         driver.get(PropertyLoader.getProperty("url"));
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(homePageHeader));
         return this;
+    }
+
+    public String getTitle() {
+        logger.info("get Home Page Title");
+        String title = driver.getTitle();
+        return title;
     }
 
     public HomePage openEveningCoursesPage() {
@@ -40,7 +46,7 @@ public class HomePage extends BasePage {
     }
 
     public HomePage openDayCoursesPage() {
-        logger.info("Open Day Courses Page");
+        logger.info("open Day Courses Page");
         Actions action = new Actions(driver);
         wait.until(ExpectedConditions.visibilityOfElementLocated(dayCoursesBtn));
         action.moveToElement(driver.findElement(dayCoursesBtn)).perform();
@@ -50,8 +56,8 @@ public class HomePage extends BasePage {
         return this;
     }
 
-    public HomePage openContactPage() {
-        logger.info("Open Contact Page");
+    public HomePage openContactsPage() {
+        logger.info("open Contacts Page");
         Actions action = new Actions(driver);
         wait.until(ExpectedConditions.visibilityOfElementLocated(contactsBtn));
         action.moveToElement(driver.findElement(contactsBtn)).click().build().perform();
@@ -59,7 +65,7 @@ public class HomePage extends BasePage {
     }
 
     public HomePage Close() {
-        logger.warn("Close Home Page");
+        logger.warn("close Home Page");
         driver.close();
         return this;
     }
