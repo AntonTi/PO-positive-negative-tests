@@ -8,8 +8,12 @@
         <classes>
             <class name="test.java.Test.GenTest">
                 <methods>
-                    <include name="CallbackFormCheckPos"/>
-                    <include name="CallbackFormCheckNeg"/>
+                    <include name="titleHomePageCheck"/>
+                    <include name="titleEveningCoursesPageCheck"/>
+                    <include name="titleDayCoursesPageCheck"/>
+                    <include name="titleContactsPageCheck"/>
+                    <include name="callbackFormCheckPos"/>
+                    <include name="callbackFormCheckNeg"/>
                     <include name="eveningCoursesCheck"/>
                     <include name="dayCoursesCheck"/>
                     <include name="eveningCoursesPriceCheck"/>

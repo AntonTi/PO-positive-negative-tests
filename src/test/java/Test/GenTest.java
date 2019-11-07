@@ -25,9 +25,46 @@ public class GenTest extends TestBaseSetup {
         contactsPage = new ContactsPage(driver);
     }
 
+    @Test(description = "check Home Page title")
+    public void titleHomePageCheck() {
+        homePage.isShown();
 
-    @Test(invocationCount = 1, description = "Callback positive test form")
-    public void CallbackFormCheckPos() {
+        assertEquals(homePage.getTitle(),
+                "Курсы программирования и веб-дизайна в Киеве | ITEA");
+    }
+
+    @Test(description = "check Evening Courses Page title")
+    public void titleEveningCoursesPageCheck() {
+        homePage.isShown();
+        homePage.openEveningCoursesPage();
+        eveningCoursesPage.isShown();
+
+        assertEquals(eveningCoursesPage.getTitle(),
+                "Обучение IT-специальностям: программирование, верстка, QA, дизайн");
+    }
+
+    @Test(description = "check Day Courses Page title")
+    public void titleDayCoursesPageCheck() {
+        homePage.isShown();
+        homePage.openDayCoursesPage();
+        dayCoursesPage.isShown();
+
+        assertEquals(dayCoursesPage.getTitle(),
+                "Авторизованное и авторское обучение | ITEA");
+    }
+
+    @Test(description = "check Contacts Page title")
+    public void titleContactsPageCheck() {
+        homePage.isShown();
+        homePage.openContactsPage();
+        contactsPage.isShown();
+
+        assertEquals(contactsPage.getTitle(),
+                "Контакты компании IT Education Academy | ITEA");
+    }
+
+    @Test(invocationCount = 1, description = "check Callback test form(positive)")
+    public void callbackFormCheckPos() {
         homePage.isShown();
         topLogoPanel.openCallbackForm();
         topLogoPanel.fillCallbackForm();
@@ -38,8 +75,8 @@ public class GenTest extends TestBaseSetup {
 
     }
 
-    @Test(invocationCount = 1, description = "Callback negative test form")
-    public void CallbackFormCheckNeg() {
+    @Test(invocationCount = 1, description = "check Callback test form(negative)")
+    public void callbackFormCheckNeg() {
         homePage.isShown();
         topLogoPanel.openCallbackForm();
         topLogoPanel.fillEmptyCallbackForm();
@@ -49,7 +86,7 @@ public class GenTest extends TestBaseSetup {
                 "border-color: red;");
     }
 
-    @Test(invocationCount = 1, description = "Check evening courses are present")
+    @Test(invocationCount = 1, description = "check Evening Courses are present")
     public void eveningCoursesCheck() {
         homePage.isShown();
         homePage.openEveningCoursesPage();
@@ -58,7 +95,7 @@ public class GenTest extends TestBaseSetup {
         assertTrue(eveningCoursesPage.checkEveningCoursesArePresent());
     }
 
-    @Test(invocationCount = 1, description = "Check day courses are present")
+    @Test(invocationCount = 1, description = "check Day Courses are present")
     public void dayCoursesCheck() {
         homePage.isShown();
         homePage.openDayCoursesPage();
@@ -67,7 +104,7 @@ public class GenTest extends TestBaseSetup {
         assertTrue(dayCoursesPage.checkDayCoursesArePresent());
     }
 
-    @Test(description = "Check evening courses price", dataProvider = "eveningCoursesProvider")
+    @Test(description = "check Evening Courses Price", dataProvider = "eveningCoursesProvider")
     public void eveningCoursesPriceCheck(String courseName, int expectedPrice) {
         homePage.isShown();
         homePage.openEveningCoursesPage();
@@ -76,7 +113,7 @@ public class GenTest extends TestBaseSetup {
         int actualPrice = eveningCoursesPage.getCoursePrice();
 
         assertEquals(actualPrice, expectedPrice,
-                String.format("Expected price to be equals '%d' for '%s'",
+                String.format("Expected Price to be equals '%d' for '%s'",
                         expectedPrice, courseName));
     }
 
@@ -109,7 +146,7 @@ public class GenTest extends TestBaseSetup {
         };
     }
 
-    @Test(description = "Debug test for fail result")
+    @Test(description = "debug Test for fail result")
     public void testFail() {
         homePage.isShown();
         fail();

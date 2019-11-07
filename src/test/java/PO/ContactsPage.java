@@ -14,13 +14,19 @@ public class ContactsPage extends BasePage {
     }
 
     public ContactsPage isShown() {
-        logger.info("Contact Page is Shown");
+        logger.info("Contacts Page is shown");
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(contactsPageHeader));
         return this;
     }
 
+    public String getTitle() {
+        logger.info("get Contacts Page Title");
+        String title = driver.getTitle();
+        return title;
+    }
+
     public ContactsPage Close() {
-        logger.warn("Close Contact Page");
+        logger.warn("close Contacts Page");
         driver.close();
         return this;
     }
