@@ -1,5 +1,7 @@
 package test.java.Test;
 
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 import org.testng.ITestContext;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -26,6 +28,7 @@ public class GenTest extends TestBaseSetup {
     }
 
     @Test(description = "check Home Page title")
+    @Severity(SeverityLevel.NORMAL)
     public void titleHomePageCheck() {
         homePage.isShown();
 
@@ -34,6 +37,7 @@ public class GenTest extends TestBaseSetup {
     }
 
     @Test(description = "check Evening Courses Page title")
+    @Severity(SeverityLevel.NORMAL)
     public void titleEveningCoursesPageCheck() {
         homePage.isShown();
         homePage.openEveningCoursesPage();
@@ -44,6 +48,7 @@ public class GenTest extends TestBaseSetup {
     }
 
     @Test(description = "check Day Courses Page title")
+    @Severity(SeverityLevel.NORMAL)
     public void titleDayCoursesPageCheck() {
         homePage.isShown();
         homePage.openDayCoursesPage();
@@ -54,6 +59,7 @@ public class GenTest extends TestBaseSetup {
     }
 
     @Test(description = "check Contacts Page title")
+    @Severity(SeverityLevel.NORMAL)
     public void titleContactsPageCheck() {
         homePage.isShown();
         homePage.openContactsPage();
@@ -63,7 +69,8 @@ public class GenTest extends TestBaseSetup {
                 "Контакты компании IT Education Academy | ITEA");
     }
 
-    @Test(invocationCount = 1, description = "check Callback test form(positive)")
+    @Test(description = "check Callback test form(positive)")
+    @Severity(SeverityLevel.CRITICAL)
     public void callbackFormCheckPos() {
         homePage.isShown();
         topLogoPanel.openCallbackForm();
@@ -76,6 +83,7 @@ public class GenTest extends TestBaseSetup {
     }
 
     @Test(invocationCount = 1, description = "check Callback test form(negative)")
+    @Severity(SeverityLevel.NORMAL)
     public void callbackFormCheckNeg() {
         homePage.isShown();
         topLogoPanel.openCallbackForm();
@@ -86,7 +94,8 @@ public class GenTest extends TestBaseSetup {
                 "border-color: red;");
     }
 
-    @Test(invocationCount = 1, description = "check Evening Courses are present")
+    @Test(description = "check Evening Courses are present")
+    @Severity(SeverityLevel.CRITICAL)
     public void eveningCoursesCheck() {
         homePage.isShown();
         homePage.openEveningCoursesPage();
@@ -95,7 +104,8 @@ public class GenTest extends TestBaseSetup {
         assertTrue(eveningCoursesPage.checkEveningCoursesArePresent());
     }
 
-    @Test(invocationCount = 1, description = "check Day Courses are present")
+    @Test(description = "check Day Courses are present")
+    @Severity(SeverityLevel.CRITICAL)
     public void dayCoursesCheck() {
         homePage.isShown();
         homePage.openDayCoursesPage();
@@ -105,6 +115,7 @@ public class GenTest extends TestBaseSetup {
     }
 
     @Test(description = "check Evening Courses Price", dataProvider = "eveningCoursesProvider")
+    @Severity(SeverityLevel.CRITICAL)
     public void eveningCoursesPriceCheck(String courseName, int expectedPrice) {
         homePage.isShown();
         homePage.openEveningCoursesPage();
@@ -147,6 +158,7 @@ public class GenTest extends TestBaseSetup {
     }
 
     @Test(description = "debug Test for fail result")
+    @Severity(SeverityLevel.TRIVIAL)
     public void testFail() {
         homePage.isShown();
         fail();
