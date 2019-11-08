@@ -1,5 +1,6 @@
 package test.java.PO;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
@@ -20,6 +21,7 @@ public class HomePage extends BasePage {
         super(driver);
     }
 
+    @Step("Home Page is shown")
     public HomePage isShown() {
         logger.info("Home Page is shown");
         driver.manage().window().maximize();
@@ -28,12 +30,14 @@ public class HomePage extends BasePage {
         return this;
     }
 
+    @Step("get Home Page Title")
     public String getTitle() {
         logger.info("get Home Page Title");
         String title = driver.getTitle();
         return title;
     }
 
+    @Step("open Evening Courses Page")
     public HomePage openEveningCoursesPage() {
         logger.info("open Evening Courses Page");
         Actions action = new Actions(driver);
@@ -45,6 +49,7 @@ public class HomePage extends BasePage {
         return this;
     }
 
+    @Step("open Day Courses Page")
     public HomePage openDayCoursesPage() {
         logger.info("open Day Courses Page");
         Actions action = new Actions(driver);
@@ -56,6 +61,7 @@ public class HomePage extends BasePage {
         return this;
     }
 
+    @Step("open Contacts Page")
     public HomePage openContactsPage() {
         logger.info("open Contacts Page");
         Actions action = new Actions(driver);
@@ -64,6 +70,7 @@ public class HomePage extends BasePage {
         return this;
     }
 
+    @Step("close Home Page")
     public HomePage Close() {
         logger.warn("close Home Page");
         driver.close();
