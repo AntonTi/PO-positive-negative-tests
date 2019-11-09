@@ -4,9 +4,9 @@
         <listener class-name="test.java.Utils.Listener"/>
         <listener class-name="test.java.Utils.AnnotationTransformer"/>
     </listeners>
-    <test name="Main_test">
+    <test name="GUI_test">
         <classes>
-            <class name="test.java.Test.GenTest">
+            <class name="test.java.Test.GuiTest">
                 <methods>
                     <include name="titleHomePageCheck"/>
                     <include name="titleEveningCoursesPageCheck"/>
