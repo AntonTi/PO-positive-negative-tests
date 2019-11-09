@@ -10,7 +10,7 @@ import test.java.PO.*;
 
 import static org.testng.Assert.*;
 
-public class GenTest extends TestBaseSetup {
+public class GuiTest extends TestBaseSetup {
 
     TopLogoPanel topLogoPanel;
     HomePage homePage;
