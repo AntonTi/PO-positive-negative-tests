@@ -5,3 +5,4 @@ logs/
 *.log
 screenshots/
 allure-results/
+/src/test/resources/cred.properties
