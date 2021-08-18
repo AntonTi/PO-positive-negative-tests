@@ -21,7 +21,7 @@ ___
 ### RUN:
 On command line (terminal), type in the following command:
 `mvn clean test`
----
+___
 ### ALLURE REPORT:
 On command line (terminal), type in the following command:
 `allure serve allure-results`
